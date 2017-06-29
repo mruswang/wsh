@@ -1,6 +1,5 @@
 # wsh
 vue+vue-router+axios+node+mongodb
-# wsh
 
 > A Vue.js project
 
