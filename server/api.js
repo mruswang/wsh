@@ -16,7 +16,9 @@ router.post('/api/login/save',(req,res) => {
     name : req.body.name,
     date1 : req.body.date1,
     date2 : req.body.date2,
-    desc : req.body.desc
+    desc : req.body.desc,
+    imgname : req.body.imgname,
+    imgurl : req.body.imgurl
   });
   // 保存数据newAccount数据进mongoDB
   newAccount.save((err,data) => {
@@ -28,6 +30,21 @@ router.post('/api/login/save',(req,res) => {
   });
 });
 
+router.post('/api/upload/save',(req,res) => {
+  // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
+  let newUpload = new models.Upload({
+    name :  req.body.name,
+    url :  req.body.url
+  });
+  // 保存数据newAccount数据进mongoDB
+  newUpload.save((err,data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('createAccount successed');
+    }
+  });
+});
 // 获取已有账号接口
 router.get('/api/login/find',(req,res) => {
   //console.log(req.body._id);
@@ -51,7 +68,9 @@ router.get('/api/login/find_id',function (req,res,next) {
           name : user.name,
           date1 : user.date1,
           date2 : user.date2,
-          desc : user.desc
+          desc : user.desc,
+          imgname : user.imgname,
+          imgurl : user.imgurl
         };
       })
     };
