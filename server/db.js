@@ -15,12 +15,21 @@ const loginSchema = mongoose.Schema({
   name: String,
   date1: Date,
   date2: Date,
-  desc: String
+  desc: String,
+  imgname:String,
+  imgurl: String
+});
+
+const uploadSchema = mongoose.Schema({
+  name: String,
+  url: String,
+  fileList2: Object
 });
 
 /************** 定义模型Model **************/
 const Models = {
-  Login : mongoose.model('Login',loginSchema)
+  Login : mongoose.model('Login',loginSchema),
+  Upload : mongoose.model('Upload',uploadSchema)
 }
 
 module.exports = Models;
