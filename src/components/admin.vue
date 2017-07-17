@@ -17,6 +17,17 @@
           </el-form-item>
         </el-col>
       </el-form-item>
+      <el-form-item label="上传文件" prop="name">
+        <el-upload
+          class="upload-demo"
+          action="/api/upload/save"
+          :file-list="fileList2"
+          :on-success="success"
+          list-type="picture">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
       <el-form-item label="文章内容" prop="desc">
         <el-input type="textarea" v-model="ruleForm2.desc" auto-complete="off"></el-input>
       </el-form-item>
@@ -29,6 +40,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+//  import Vue from 'vue'
   export default {
     data () {
       return {
@@ -37,19 +49,22 @@
           date1: '',
           date2: '',
           desc: ''
-        }
+        },
+        fileList2: []
       }
     },
     methods: {
       submitForm (ruleForm2) {
         this.$refs[ruleForm2].validate((valid) => {
           if (valid) {
-            console.log(this.ruleForm2)
+            // console.log(this.fileList2)
             this.axios.post('/api/login/save', {
               name: this.ruleForm2.name,
               date1: this.ruleForm2.date1,
               date2: this.ruleForm2.date2,
-              desc: this.ruleForm2.desc
+              desc: this.ruleForm2.desc,
+              imgname: this.fileList2.name,
+              imgurl: this.fileList2.url
             })
               .then(function (response) {
                 console.log(response)
@@ -65,6 +80,14 @@
       },
       resetForm (formName) {
         this.$refs[formName].resetFields()
+      },
+      success (response, file, fileList) {
+        // console.log(fileList)
+        this.fileList2.name = fileList[0].name
+        this.fileList2.url = fileList[0].url
+        // console.log(this.fileList2)
+        // Vue.set(this.imgname, 'imgname', fileList[0].name)
+       //  Vue.set(this.imgurl, 'imgurl', fileList[0].url)
       }
     }
   }

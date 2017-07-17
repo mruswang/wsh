@@ -26,7 +26,7 @@ export default {
     }).then((response) => {
       let data = response.data.users[0]
       this.data = data
-     // console.log(data)
+      console.log(data)
     })
   }
 }

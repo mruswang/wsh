@@ -5,11 +5,11 @@
       <el-col :xs="24" :sm="16">
         <div class="grid-content bg-purple">
           <h3>特别推荐</h3>
-          <el-row class="media" v-for="item in filteredItems">
+          <el-row class="media" v-for="(item,index) in filteredItems">
             <el-col :xs="10" :sm="7"  class="media-left">
               <div class="grid-content bg-purple">
                 <a class="media-left" :href="'/details/' + item._id ">
-                  <img class="img-rounded" :src="text_img" width="100%" alt="">
+                  <img class="img-rounded" :src="item.imgurl" width="100%" alt="">
                 </a>
               </div>
             </el-col>
@@ -63,6 +63,7 @@ export default {
     this.axios.get('/api/login/find').then((response) => {
       let data = response.data
       this.data = data
+      console.log(data)
     })
   },
   components: {
