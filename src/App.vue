@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <m-header></m-header>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <m-footer></m-footer>
   </div>
 </template>
@@ -17,5 +19,24 @@ export default {
 </script>
 
 <style>
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1200px;
+    }
+  }
 
+  @media (min-width: 768px) and (max-width: 1199px){
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 455px) and (max-width: 767px){
+    .container {
+      width: 750px;
+    }
+  }
 </style>
